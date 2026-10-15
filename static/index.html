@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Анонимное пространство для честных признаний без имён и оценок.">
+  <title>silent room — анонимные признания</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="silent room — на главную">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>silent room</span>
+    </a>
+    <nav aria-label="Основная навигация">
+      <button class="nav-cta" data-open-compose>Оставить своё</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <h1>Иногда правду легче<br><em>сказать в темноте.</em></h1>
+      <div class="hero-actions">
+        <button class="primary-button" data-open-compose>Признаться анонимно <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <section class="feed-section" id="confessions">
+      <div class="section-heading">
+        <h2>Признания</h2>
+        <div class="live-stat"><span class="pulse"></span><strong id="total-count">—</strong></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters" role="group" aria-label="Категории">
+          <button class="filter active" data-category="все">Все</button>
+          <button class="filter" data-category="поступок">Поступки</button>
+          <button class="filter" data-category="отношения">Отношения</button>
+          <button class="filter" data-category="тайна">Тайны</button>
+          <button class="filter" data-category="мысли">Мысли</button>
+        </div>
+        <label class="sort-control"><span class="visually-hidden">Сортировка</span>
+          <select id="sort-select">
+            <option value="new">Новые</option>
+            <option value="popular">Популярные</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="confession-grid" class="confession-grid" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <span aria-hidden="true">○</span>
+        <p>В этой категории пока тихо.<br>Вы можете стать первым.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Если вам или кому-то рядом угрожает опасность, обратитесь в местную экстренную службу. Этот сайт не заменяет профессиональную помощь.</p>
+  </footer>
+
+  <dialog id="compose-dialog">
+    <form id="compose-form" method="dialog">
+      <button type="button" class="close-button" aria-label="Закрыть" data-close-compose>×</button>
+      <h2>Ваше признание</h2>
+
+      <div class="textarea-wrap">
+        <textarea id="confession-text" name="text" minlength="20" maxlength="2000" placeholder="Я никогда никому не говорил, что…" required></textarea>
+        <span id="char-count">0 / 2000</span>
+      </div>
+
+      <label class="field-label" for="category-select">О чём это?</label>
+      <select id="category-select" name="category" required>
+        <option value="мысли">Мысли</option>
+        <option value="поступок">Поступок</option>
+        <option value="отношения">Отношения</option>
+        <option value="тайна">Тайна</option>
+        <option value="другое">Другое</option>
+      </select>
+
+      <label class="honeypot" aria-hidden="true">Не заполнять<input name="website" tabindex="-1" autocomplete="off"></label>
+      <div id="form-message" class="form-message" role="status"></div>
+      <button class="primary-button submit-button" type="submit">Опубликовать анонимно <span aria-hidden="true">↗</span></button>
+      <p class="privacy-copy">IP сохраняется только как защищённый хеш.</p>
+    </form>
+  </dialog>
+
+  <template id="confession-template">
+    <article class="confession-card">
+      <div class="card-top">
+        <span class="category-badge"></span>
+        <span class="card-number"></span>
+      </div>
+      <p class="confession-text"></p>
+      <div class="card-meta">
+        <time></time>
+        <span class="view-count" title="Уникальные просмотры"><span aria-hidden="true">◉</span> <b></b></span>
+      </div>
+    </article>
+  </template>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

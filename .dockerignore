@@ -1,0 +1,9 @@
+.git
+.gitignore
+.env
+.gocache
+data
+confession
+confession.exe
+confession.exe~
+README.md
